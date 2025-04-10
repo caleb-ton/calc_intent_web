@@ -27,25 +27,26 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun Calc_Screen(modifier: Modifier = Modifier) {
+fun Calc_Screen(navConroller: NavController) {
     var firstnum by remember { mutableStateOf(TextFieldValue("")) }
     var secondnum by remember { mutableStateOf(TextFieldValue("")) }
     var answer by remember { mutableStateOf("") }
-    Column (verticalArrangement = Arrangement.Top,
+    Column (verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Unspecified)){
-        Text(text = "Calculate here!!!",
+        Text(text = "Calculate here",
             fontWeight = FontWeight.ExtraBold,
-            color = Color.Yellow,
-            fontSize = 50.sp,
+            color = Color.White,
+            fontSize = 30.sp,
             fontFamily = FontFamily.SansSerif
         )
-        Spacer(modifier = Modifier.height(50.dp))
-
+        Spacer(modifier = Modifier.height(5.dp))
         OutlinedTextField(value =firstnum ,
             onValueChange={firstnum=it},
             label = {Text(text = "Enter First Digit.",
@@ -55,7 +56,7 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 color = Color.Magenta)},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         OutlinedTextField(value =secondnum ,
             onValueChange={secondnum=it},
@@ -66,9 +67,19 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 color = Color.Magenta)},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        OutlinedButton(onClick = {/*TODO*/},
+        OutlinedButton(onClick = {
+            val myfirstnum=firstnum.text.trim()
+            val mysecondnum=secondnum.text.trim()
+            if (myfirstnum.isEmpty()|| mysecondnum.isEmpty()) {
+                answer = "Please fill in all details"
+            }else{
+                val my_answer=myfirstnum.toDouble() + mysecondnum.toDouble()
+                answer=my_answer.toString()
+            }
+            }
+        ,
             colors = ButtonDefaults.buttonColors(Color.White),
             modifier = Modifier.width(300.dp)) {
             Text(text = "+",
@@ -76,9 +87,17 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 fontSize = 35.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
-        Spacer(modifier = Modifier.height(45.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
-        OutlinedButton(onClick = {/*TODO*/},
+        OutlinedButton(onClick = {val myfirstnum=firstnum.text.trim()
+            val mysecondnum=secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()) {
+                answer = "Please fill in all details"
+            }else{
+                val my_answer=myfirstnum.toDouble() - mysecondnum.toDouble()
+                answer=my_answer.toString()
+            }
+        },
             colors = ButtonDefaults.buttonColors(Color.White),
             modifier = Modifier.width(300.dp)) {
             Text(text = "-",
@@ -86,9 +105,17 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 fontSize = 35.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
-        Spacer(modifier = Modifier.height(45.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
-        OutlinedButton(onClick = {/*TODO*/},
+        OutlinedButton(onClick = {val myfirstnum=firstnum.text.trim()
+            val mysecondnum=secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()) {
+                answer = "Please fill in all details"
+            }else{
+                val my_answer=myfirstnum.toDouble() * mysecondnum.toDouble()
+                answer=my_answer.toString()
+            }
+        },
             colors = ButtonDefaults.buttonColors(Color.White),
             modifier = Modifier.width(300.dp)) {
             Text(text = "*",
@@ -96,9 +123,17 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 fontSize = 35.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
-        Spacer(modifier = Modifier.height(45.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
-        OutlinedButton(onClick = {/*TODO*/},
+        OutlinedButton(onClick = {val myfirstnum=firstnum.text.trim()
+            val mysecondnum=secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()) {
+                answer = "Please fill in all details"
+            }else{
+                val my_answer=myfirstnum.toDouble() / mysecondnum.toDouble()
+                answer=my_answer.toString()
+            }
+        },
             colors = ButtonDefaults.buttonColors(Color.White),
             modifier = Modifier.width(300.dp)) {
             Text(text = "/",
@@ -106,12 +141,12 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 fontSize = 35.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
-
-
-
-
-
-
+        Text(text = answer,
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.Red,
+            fontSize = 50.sp,
+            fontFamily = FontFamily.SansSerif
+        )
     }
 
 }
@@ -119,5 +154,5 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun Calc_prev() {
-    Calc_Screen()
+    Calc_Screen(rememberNavController())
 }
