@@ -35,7 +35,7 @@ fun Calc_Screen(navConroller: NavController) {
     var firstnum by remember { mutableStateOf(TextFieldValue("")) }
     var secondnum by remember { mutableStateOf(TextFieldValue("")) }
     var answer by remember { mutableStateOf("") }
-    Column (verticalArrangement = Arrangement.SpaceEvenly,
+    Column (verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
@@ -43,31 +43,37 @@ fun Calc_Screen(navConroller: NavController) {
         Text(text = "Calculate here",
             fontWeight = FontWeight.ExtraBold,
             color = Color.White,
-            fontSize = 30.sp,
+//            fontSize = 30.sp,
             fontFamily = FontFamily.SansSerif
         )
-        Spacer(modifier = Modifier.height(5.dp))
+        Text(text = answer,
+            fontWeight = FontWeight.ExtraLight,
+            color = Color.Red,
+            fontSize = 40.sp,
+            fontFamily = FontFamily.SansSerif
+        )
+        Spacer(modifier = Modifier.height(30.dp))
         OutlinedTextField(value =firstnum ,
             onValueChange={firstnum=it},
             label = {Text(text = "Enter First Digit.",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.Cursive,
                 color = Color.Magenta)},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         OutlinedTextField(value =secondnum ,
             onValueChange={secondnum=it},
             label = {Text(text = "Enter Second Digit.",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.Cursive,
                 color = Color.Magenta)},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         OutlinedButton(onClick = {
             val myfirstnum=firstnum.text.trim()
@@ -81,10 +87,10 @@ fun Calc_Screen(navConroller: NavController) {
             }
         ,
             colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier.width(300.dp)) {
+            modifier = Modifier.width(200.dp)) {
             Text(text = "+",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -99,10 +105,10 @@ fun Calc_Screen(navConroller: NavController) {
             }
         },
             colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier.width(300.dp)) {
+            modifier = Modifier.width(200.dp)) {
             Text(text = "-",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -117,10 +123,10 @@ fun Calc_Screen(navConroller: NavController) {
             }
         },
             colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier.width(300.dp)) {
+            modifier = Modifier.width(200.dp)) {
             Text(text = "*",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -135,18 +141,18 @@ fun Calc_Screen(navConroller: NavController) {
             }
         },
             colors = ButtonDefaults.buttonColors(Color.White),
-            modifier = Modifier.width(300.dp)) {
+            modifier = Modifier.width(200.dp)) {
             Text(text = "/",
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 35.sp,
+                fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif, color = Color.Black)
         }
-        Text(text = answer,
-            fontWeight = FontWeight.ExtraBold,
-            color = Color.Red,
-            fontSize = 50.sp,
-            fontFamily = FontFamily.SansSerif
-        )
+//        Text(text = answer,
+//            fontWeight = FontWeight.ExtraBold,
+//            color = Color.Red,
+//            fontSize = 50.sp,
+//            fontFamily = FontFamily.SansSerif
+//        )
     }
 
 }
